@@ -66,6 +66,6 @@ Every content will be displayed depending on the productId. All directives will 
 10. **Submitting Account Creation**:
     - Upon submission, the password is sent via a POST request to `api/create-account`.
     - The password is associated with the `accountId.customerInfo` data for the respective user.
-    - When satisfied conditionally render the thank you message by setting `showThankYouMessage`to true.
+    - When satisfied conditionally render the thank you message by setting `showThankYouMessage` to true.
 
 Feel free to reach out if you have any questions!
