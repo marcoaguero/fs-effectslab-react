@@ -6,7 +6,7 @@ const Button = (props) => {
       <div className="text-center">
         <a
           className="btn btn-outline-dark mt-auto"
-          href="#"
+          href={props.link}
           data-fsc-item-path-value={props.productId}
           data-fsc-action={props.actions}
         >

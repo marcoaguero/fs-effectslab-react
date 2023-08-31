@@ -25,9 +25,47 @@ The webshop includes simple functionality based on the productId.
 Every content will be displayed depending on the productId. All directives will point towards that productId once defined in the component ProductCard.
 This could have also be done using state management via the `https://api.fastspring.com/products/` API. I wanted to test first SBL directives in React so I hardcoded them in the Grid component. I will do this.
 
-### WIP and doubts
+## Order Processing Flow - webhook implementation logic for React
 
-- As mentioned above, will move from hardcoded IDs to dinamically updated with the products list API and map them through the ProductCard component
-- When adding a bundle all other product information coming from directives gets removed
-- Improve UI and pick better colors
-- Working on finishing the order.completed triggers account creating. Will make a video explaining this and all the other features.
+1. **Order Completed Event**: order.completed sends the corresponding response to the server endpoint using ngrok to expose it publicly.
+
+2. **Server Logic**: The server endpoint handles the incoming request and executes custom logic.
+
+3. **Populating `db.json`**:
+
+   - Check if the customer account (identified by its `id`) exists in the `db.json` database.
+   - If the account is not found, add `customerInfo` and an array of `orderId` to the account's data.
+
+4. **Thank You Page & URL Parameter**:
+
+   - After closing the order popup, users are automatically redirected to the thank you page.
+   - The URL contains the `orderId` parameter.
+
+5. **Handling URL Parameters**:
+
+   - During component mount, extract the `orderId` parameter from the URL using the `URLSearchParams` method within a `useEffect` hook.
+
+6. **API Call for Email Retrieval**:
+
+   - Make an API call to `api/get-email/${orderId}` to check if the user is registered in the database.
+   - A response is returned only if the user does not have an associated password (indicating no account creation).
+
+7. **Conditional Rendering**:
+
+   - Based on the absence of a password, conditionally render the "Create Account" button on the thank you page.
+
+8. **Create Account Link**:
+
+   - Clicking the "Create Account" link takes the user to the `/create-account` page.
+   - The URL includes the parameters `accountId` and `email` for pre-filling the form.
+
+9. **Create Account Component**:
+
+   - The `CreateAccount` component receives `accountId` and `email` information from the URL.
+   - The email field is disabled when an email is provided in the URL.
+
+10. **Submitting Account Creation**:
+    - Upon submission, the password is sent via a POST request to `api/create-account`.
+    - The password is associated with the `accountId.customerInfo` data for the respective user.
+
+Feel free to reach out if you have any questions or need further assistance!
