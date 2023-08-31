@@ -23,7 +23,6 @@ This project was built in order to test the SBL (Store Builder Library), APIs an
 The webshop includes simple functionality based on the productId.
 
 Every content will be displayed depending on the productId. All directives will point towards that productId once defined in the component ProductCard.
-This could have also be done using state management via the `https://api.fastspring.com/products/` API. I wanted to test first SBL directives in React so I hardcoded them in the Grid component. I will do this.
 
 ## Order Processing Flow - webhook implementation logic for React
 
@@ -67,5 +66,6 @@ This could have also be done using state management via the `https://api.fastspr
 10. **Submitting Account Creation**:
     - Upon submission, the password is sent via a POST request to `api/create-account`.
     - The password is associated with the `accountId.customerInfo` data for the respective user.
+    - When satisfied conditionally render the thank you message by setting `showThankYouMessage`to true.
 
-Feel free to reach out if you have any questions or need further assistance!
+Feel free to reach out if you have any questions!
